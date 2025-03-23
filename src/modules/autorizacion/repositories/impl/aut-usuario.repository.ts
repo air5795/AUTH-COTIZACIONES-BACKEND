@@ -63,6 +63,7 @@ export class AutUsuarioRepository {
         "        'idEmpresa', ur.id_empresa,\n" +
         "        'numPatronalEmpresa', ge.emp_npatronal,\n"+
         "        'empresa', ge.emp_nom,\n" +
+        "        'tipo', ge.tipo,\n" +
         "        'idSubsector',ur.id_subsector\n" +
         '        )AS data FROM autorizacion.aut_usuario_restriccion ur\n' +
         '        INNER JOIN parametro.par_sistema ps ON ps.id_sistema = ur.id_sistema\n' +
