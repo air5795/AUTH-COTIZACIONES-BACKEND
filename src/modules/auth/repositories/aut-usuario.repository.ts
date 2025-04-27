@@ -78,7 +78,7 @@ export class AutUsuarioRepository {
         'nivel_cotizaciones_empresa AS (\n' +
         '  SELECT\n' +
         '    b.id_usuario_restriccion,\n' +
-        "    CONCAT (UPPER (p.nombre_clasificador_detalle), ' - ', UPPER (gem.emp_nom), ' (', UPPER (gr.nombre_regional),')') AS nombre\n" +
+        "    CONCAT (UPPER (gem.emp_nom) , ' - ', 'EMPRESA') AS nombre\n" +
         '  FROM\n' +
         '    base b\n' +
         '  INNER JOIN geografia.geo_empresa gem ON b.id_empresa = gem.id_empresa\n' +
@@ -94,15 +94,35 @@ export class AutUsuarioRepository {
         '  FROM\n' +
         '    base b\n' +
         '  INNER JOIN parametro.par_clasificador_detalle p ON b.idc_nivel = p.identificador_clasificador_detalle\n' +
-        "  WHERE b.idc_nivel = 'COTIZACIONES_CBES'\n" +
-        ')\n' +
+        "  WHERE b.idc_nivel = 'ADMINISTRADOR_COTIZACIONES'\n" +
+        '),\n' +
+        '\n' +
+        'nivel_cotizaciones_superAdmin AS (\n' +
+        '  SELECT\n' +
+        '    b.id_usuario_restriccion,\n' +
+        "    CONCAT (UPPER (p.nombre_clasificador_detalle), ' - ', 'ADMIN') AS nombre\n" +
+        '  FROM\n' +
+        '    base b\n' +
+        '  INNER JOIN parametro.par_clasificador_detalle p ON b.idc_nivel = p.identificador_clasificador_detalle\n' +
+        "  WHERE b.idc_nivel = 'SUPER-ADMINISTRADOR'\n" +
+        '),\n' +
+        '\n' +
+        'nivel_cotizaciones_tesoreria AS (\n' +
+        '  SELECT\n' +
+        '    b.id_usuario_restriccion,\n' +
+        "    CONCAT (UPPER (p.nombre_clasificador_detalle)) AS nombre\n" +
+        '  FROM\n' +
+        '    base b\n' +
+        '  INNER JOIN parametro.par_clasificador_detalle p ON b.idc_nivel = p.identificador_clasificador_detalle\n' +
+        "  WHERE b.idc_nivel = 'ADMINISTRADOR_TESORERIA'\n" +
+        ')\n' + 
         '\n' +
         'SELECT\n' +
         '  id_usuario_restriccion, \n' +
         '  nombre\n' +
         'FROM (\n' +
         '  SELECT * FROM super_administrador\n' +
-        '  UNION all\n' +
+        '  UNION ALL\n' +
         '  SELECT * FROM nivel_nacional\n' +
         '  UNION ALL\n' +
         '  SELECT * FROM nivel_establecimiento\n' +
@@ -114,6 +134,10 @@ export class AutUsuarioRepository {
         '  SELECT * FROM nivel_municipio\n' +
         '  UNION ALL\n' +
         '  SELECT * FROM nivel_cotizaciones_empresa\n' +
+        '  UNION ALL\n' +
+        '  SELECT * FROM nivel_cotizaciones_superAdmin\n' +
+        '  UNION ALL\n' +
+        '  SELECT * FROM nivel_cotizaciones_tesoreria\n' +
         '  UNION ALL\n' +
         '  SELECT * FROM nivel_cotizaciones_cbes\n' +
         ') AS unioned_queries;';

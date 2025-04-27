@@ -578,6 +578,7 @@ export class AutPerfilService {
           });
         });
         const listaRecursos = AutUsuarioPerfilRecursoMapper_EntitiesToDtos(resp);
+        console.log("listaRecursos", listaRecursos);
         return this._respuestaService.respuestaHttp(
           true,
           listaRecursos,

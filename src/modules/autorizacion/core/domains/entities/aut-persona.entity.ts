@@ -147,18 +147,18 @@ export class AutPersona {
   })
   verificacionSegip: boolean;
 
-  @Column({
+/*   @Column({
     type: 'int8',
     name: 'id_hospital',
   })
-	idHospital: number;
+	idHospital: number; */
 
-  @Column({
+/*   @Column({
     type: 'varchar',
     length: 50,
     name: 'cargo_persona',
   })
-	cargoPersona: string;
+	cargoPersona: string; */
   /*OneToMany(
     () => ParClasificadorDetalle,
     (parClasificadorDetalle) => parClasificadorDetalle.parClasificador,

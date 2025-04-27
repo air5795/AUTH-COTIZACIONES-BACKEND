@@ -171,16 +171,16 @@ export class CreateAutPersonaDto {
 	@ApiProperty({ description: `Lista de id perfiles` })
 	colIdPerfiles: number[];
 
-	@IsNumber()
+/* 	@IsNumber()
 	@Type(() => Number)
 	@IsOptional()
 	@ApiPropertyOptional({ description: `id_hospital` })
-	idHospital: number;
+	idHospital: number; */
 
-	@IsString()
+/* 	@IsString()
 	@IsOptional()
 	@ApiPropertyOptional({ description: `cargo_persona` })
-	cargoPersona: string;
+	cargoPersona: string; */
 }
 
 export class UpdateAutPersonaDto extends PartialType(CreateAutPersonaDto) {}
